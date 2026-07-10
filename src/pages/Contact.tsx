@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Mail, MapPin, Github, Linkedin, Instagram, Send, Check } from "lucide-react";
 import ScrollReveal from "../components/ScrollReveal";
+import client from "../api/client";
 
 const pageTransition = {
   initial: { opacity: 0 },
@@ -12,12 +13,25 @@ const pageTransition = {
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Phase 1: static form. Wire to backend / email service in Phase 2.
-    setSent(true);
+    setError(null);
+    setSubmitting(true);
+    try {
+      await client.post("/contact", form);
+      setSent(true);
+    } catch (err: any) {
+      const msg =
+        err?.response?.data?.error ||
+        "Something went wrong sending your message. Please try again.";
+      setError(msg);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -73,15 +87,20 @@ export default function Contact() {
                     placeholder="Tell us what's on your mind"
                   />
                 </label>
+                {error && (
+                  <p className="text-sm text-red-400">{error}</p>
+                )}
                 <button
                   type="submit"
-                  disabled={sent}
+                  disabled={sent || submitting}
                   className="flex items-center justify-center gap-2 rounded-full bg-grad-signal px-6 py-3 text-sm font-medium text-void transition-transform hover:scale-[1.02] disabled:opacity-70"
                 >
                   {sent ? (
                     <>
                       <Check size={16} /> Message sent
                     </>
+                  ) : submitting ? (
+                    <>Sending...</>
                   ) : (
                     <>
                       <Send size={16} /> Send message
@@ -110,9 +129,30 @@ export default function Contact() {
               <div className="rounded-2xl border border-bordersubtle bg-surface p-6">
                 <p className="eyebrow text-xs text-accent-secondary">// social</p>
                 <div className="mt-4 flex gap-4">
-                  <a href="#" className="text-ink-muted hover:text-accent-secondary"><Github size={18} /></a>
-                  <a href="#" className="text-ink-muted hover:text-accent-secondary"><Linkedin size={18} /></a>
-                  <a href="#" className="text-ink-muted hover:text-accent-secondary"><Instagram size={18} /></a>
+                  <a
+                    href="https://github.com/acmpesmcoe"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-ink-muted hover:text-accent-secondary"
+                  >
+                    <Github size={18} />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/acm-student-chapter-423992307"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-ink-muted hover:text-accent-secondary"
+                  >
+                    <Linkedin size={18} />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/pesmcoe_acm/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-ink-muted hover:text-accent-secondary"
+                  >
+                    <Instagram size={18} />
+                  </a>
                 </div>
               </div>
             </div>
