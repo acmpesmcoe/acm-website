@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import ScrollReveal from "../components/ScrollReveal";
-import { facultyMentors } from "../data/content";
+import client from "../api/client";
 import { Target, Eye } from "lucide-react";
 
 const pageTransition = {
@@ -11,6 +12,14 @@ const pageTransition = {
 };
 
 export default function About() {
+  const [facultyMentors, setFacultyMentors] = useState<any[]>([]);
+
+  useEffect(() => {
+    client.get("/team").then((res) => {
+      setFacultyMentors(res.data.faculty);
+    }).catch(() => {});
+  }, []);
+
   return (
     <motion.main {...pageTransition} className="pt-32">
       <section className="mx-auto max-w-4xl px-6">
@@ -78,19 +87,23 @@ export default function About() {
           <p className="eyebrow text-xs text-accent-secondary">// faculty_coordinator</p>
           <h2 className="mt-4 font-display text-3xl font-semibold">Guided by</h2>
         </ScrollReveal>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2">
-          {facultyMentors.map((f, i) => (
-            <ScrollReveal key={f.name} delay={i * 0.1}>
-              <div className="flex items-center gap-4 rounded-2xl border border-bordersubtle bg-surface p-5">
-                <img src={f.image} alt={f.name} className="h-16 w-16 rounded-full object-cover" />
-                <div>
-                  <h3 className="font-display font-semibold">{f.name}</h3>
-                  <p className="font-mono text-xs text-accent-secondary">{f.role}</p>
+        {facultyMentors.length === 0 ? (
+          <p className="mt-8 text-sm text-ink-muted">Loading...</p>
+        ) : (
+          <div className="mt-8 grid gap-6 sm:grid-cols-2">
+            {facultyMentors.map((f, i) => (
+              <ScrollReveal key={f._id} delay={i * 0.1}>
+                <div className="flex items-center gap-4 rounded-2xl border border-bordersubtle bg-surface p-5">
+                  <img src={f.image} alt={f.name} className="h-16 w-16 rounded-full object-cover" />
+                  <div>
+                    <h3 className="font-display font-semibold">{f.name}</h3>
+                    <p className="font-mono text-xs text-accent-secondary">{f.role}</p>
+                  </div>
                 </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        )}
       </section>
     </motion.main>
   );

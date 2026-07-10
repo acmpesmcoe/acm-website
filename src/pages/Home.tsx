@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Code2, Users2, Rocket, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
 import NetworkCanvas from "../components/NetworkCanvas";
 import ScrollReveal from "../components/ScrollReveal";
 import AnimatedCounter from "../components/AnimatedCounter";
 import EventCard from "../components/EventCard";
-import { stats, upcomingEvents } from "../data/content";
+import client from "../api/client";
 
 const pageTransition = {
   initial: { opacity: 0 },
@@ -29,9 +30,27 @@ const photos = [
 ];
 
 export default function Home() {
+  const [stats, setStats] = useState<{ value: number; suffix: string; label: string }[]>([]);
+  const [upcomingEvents, setUpcomingEvents] = useState<any[]>([]);
+
+  useEffect(() => {
+    client.get("/events").then((res) => {
+      setUpcomingEvents(res.data.upcoming.slice(0, 3));
+    }).catch(() => {});
+
+    client.get("/team").then((res) => {
+      const total = res.data.faculty.length + res.data.core.length;
+      setStats([
+        { value: total, suffix: "+", label: "active members" },
+        { value: res.data.core.length, suffix: "", label: "core team" },
+        { value: res.data.faculty.length, suffix: "", label: "faculty mentors" },
+        { value: new Date().getFullYear() - 2022, suffix: "", label: "years running" },
+      ]);
+    }).catch(() => {});
+  }, []);
+
   return (
     <motion.main {...pageTransition}>
-      {/* HERO */}
       <section className="relative flex min-h-screen items-center overflow-hidden pt-20">
         <NetworkCanvas />
         <div className="relative z-10 mx-auto max-w-6xl px-6">
@@ -92,7 +111,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* INTRO */}
       <section className="mx-auto max-w-6xl px-6 py-24">
         <ScrollReveal>
           <p className="eyebrow text-xs text-accent-secondary">// about_acm</p>
@@ -110,7 +128,6 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
-      {/* WHY JOIN */}
       <section className="mx-auto max-w-6xl px-6 py-12">
         <ScrollReveal>
           <p className="eyebrow text-xs text-accent-secondary">// why_join</p>
@@ -129,7 +146,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* UPCOMING EVENTS PREVIEW */}
       <section className="mx-auto max-w-6xl px-6 py-12">
         <ScrollReveal>
           <div className="flex items-end justify-between">
@@ -144,12 +160,11 @@ export default function Home() {
         </ScrollReveal>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {upcomingEvents.map((e, i) => (
-            <EventCard key={e.id} event={e} index={i} />
+            <EventCard key={e._id} event={e} index={i} />
           ))}
         </div>
       </section>
 
-      {/* STATISTICS */}
       <section className="mx-auto max-w-6xl px-6 py-24">
         <ScrollReveal>
           <div className="rounded-3xl border border-bordersubtle bg-surface/60 px-8 py-14">
@@ -162,7 +177,6 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
-      {/* FEATURED PHOTOS */}
       <section className="mx-auto max-w-6xl px-6 py-12">
         <ScrollReveal>
           <p className="eyebrow text-xs text-accent-secondary">// gallery</p>
@@ -188,7 +202,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* JOIN CTA */}
       <section className="mx-auto max-w-6xl px-6 py-24">
         <ScrollReveal>
           <div className="relative overflow-hidden rounded-3xl bg-grad-signal px-8 py-16 text-center">
