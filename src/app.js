@@ -37,11 +37,14 @@ app.use(
 
 app.use(morgan("dev"));
 
-// Rate limit the contact form specifically, to block spam bots
+// Rate limit the contact form specifically, to block spam bots.
+// Only throttle POST (public form submissions) - GET requests (used by the
+// admin dashboard to read messages) should never be blocked by this.
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 5,
   message: { error: "Too many messages sent. Please try again later." },
+  skip: (req) => req.method !== "POST",
 });
 app.use("/api/contact", contactLimiter);
 
