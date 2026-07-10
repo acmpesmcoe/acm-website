@@ -8,23 +8,31 @@ export default function Overview() {
 
   useEffect(() => {
     (async () => {
-      try {
-        const [eventsRes, teamRes, alumniRes, messagesRes] = await Promise.all([
-          client.get("/events/admin/all"),
-          client.get("/team/admin/all"),
-          client.get("/alumni"),
-          client.get("/contact"),
-        ]);
-        setStats({
-          events: eventsRes.data.length,
-          team: teamRes.data.length,
-          alumni: alumniRes.data.length,
-          messages: messagesRes.data.length,
-          unread: messagesRes.data.filter((m: any) => !m.read).length,
-        });
-      } catch {
-        // silently ignore - individual pages will surface errors
-      }
+      const [eventsRes, teamRes, alumniRes, messagesRes] = await Promise.allSettled([
+        client.get("/events/admin/all"),
+        client.get("/team/admin/all"),
+        client.get("/alumni"),
+        client.get("/contact"),
+      ]);
+
+      setStats((prev) => ({
+        events: eventsRes.status === "fulfilled" ? eventsRes.value.data.length : prev.events,
+        team: teamRes.status === "fulfilled" ? teamRes.value.data.length : prev.team,
+        alumni: alumniRes.status === "fulfilled" ? alumniRes.value.data.length : prev.alumni,
+        messages: messagesRes.status === "fulfilled" ? messagesRes.value.data.length : prev.messages,
+        unread:
+          messagesRes.status === "fulfilled"
+            ? messagesRes.value.data.filter((m: any) => !m.read).length
+            : prev.unread,
+      }));
+
+      // Optional: surface which calls failed, e.g. for debugging or a toast
+      [eventsRes, teamRes, alumniRes, messagesRes].forEach((r, i) => {
+        if (r.status === "rejected") {
+          const labels = ["events", "team", "alumni", "messages"];
+          console.error(`Failed to load ${labels[i]} stats:`, r.reason);
+        }
+      });
     })();
   }, []);
 
