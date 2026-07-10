@@ -17,9 +17,33 @@ export default function Footer() {
               community of builders, one commit at a time.
             </p>
             <div className="mt-5 flex gap-4">
-              <a href="#" aria-label="GitHub" className="text-ink-muted transition-colors hover:text-accent-secondary"><Github size={18} /></a>
-              <a href="#" aria-label="LinkedIn" className="text-ink-muted transition-colors hover:text-accent-secondary"><Linkedin size={18} /></a>
-              <a href="#" aria-label="Instagram" className="text-ink-muted transition-colors hover:text-accent-secondary"><Instagram size={18} /></a>
+              <a
+                href="https://github.com/acmpesmcoe"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="text-ink-muted transition-colors hover:text-accent-secondary"
+              >
+                <Github size={18} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/acm-student-chapter-423992307"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="text-ink-muted transition-colors hover:text-accent-secondary"
+              >
+                <Linkedin size={18} />
+              </a>
+              <a
+                href="https://www.instagram.com/pesmcoe_acm/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="text-ink-muted transition-colors hover:text-accent-secondary"
+              >
+                <Instagram size={18} />
+              </a>
             </div>
           </div>
 
