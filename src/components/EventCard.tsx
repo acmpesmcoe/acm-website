@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { Calendar, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface EventItem {
-  id: number;
+  _id: string;
   title: string;
   date: string;
   tag: string;
@@ -20,6 +21,7 @@ export default function EventCard({ event, index = 0 }: { event: EventItem; inde
       whileHover={{ y: -6 }}
       className="group relative overflow-hidden rounded-2xl border border-bordersubtle bg-surface"
     >
+      <Link to={`/events/${event._id}`} className="block">
       <div className="relative h-44 overflow-hidden">
         <img
           src={event.image}
@@ -43,6 +45,7 @@ export default function EventCard({ event, index = 0 }: { event: EventItem; inde
           View details <ArrowUpRight size={15} />
         </div>
       </div>
+      </Link>
     </motion.div>
   );
 }

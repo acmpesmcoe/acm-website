@@ -6,6 +6,7 @@ import PageLoader from "./components/PageLoader";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Events from "./pages/Events";
+import EventDetails from "./pages/EventDetails";
 import Team from "./pages/Team";
 import Alumni from "./pages/Alumni";
 import Contact from "./pages/Contact";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/team" element={<Team />} />
           <Route path="/alumni" element={<Alumni />} />
           <Route path="/contact" element={<Contact />} />

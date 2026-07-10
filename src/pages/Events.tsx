@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import ScrollReveal from "../components/ScrollReveal";
 import EventCard from "../components/EventCard";
 import { useEffect, useState } from "react";
@@ -90,12 +91,12 @@ export default function Events() {
               <div key={e._id}>
                 <EventCard event={e} index={i} />
                 {tab === "upcoming" && (
-                  <a
-                    href="#register"
+                  <Link
+                    to={`/events/${e._id}`}
                     className="mt-3 inline-block font-mono text-xs text-accent-warm hover:underline"
                   >
                     register now →
-                  </a>
+                  </Link>
                 )}
               </div>
             )))}
