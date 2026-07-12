@@ -5,11 +5,11 @@ import { Link, useParams } from "react-router-dom";
 import client from "../api/client";
 
 const pageTransition = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-  transition: { duration: 0.4 },
-};
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -16 },
+  transition: { duration: 0.35, ease: "easeOut" },
+} as const;
 
 export default function EventDetails() {
   const { id } = useParams<{ id: string }>();
@@ -63,7 +63,7 @@ export default function EventDetails() {
                   alt={event.title}
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-void via-void/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
                 <span className="eyebrow absolute left-4 top-4 rounded-full bg-void/70 px-3 py-1 text-[10px] text-accent-secondary backdrop-blur">
                   {event.tag}
                 </span>

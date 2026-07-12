@@ -3,29 +3,44 @@
 @tailwind utilities;
 
 :root {
-  --c-void: #0B0B12;
-  --c-surface: #14141F;
-  --c-surface2: #1B1B29;
-  --c-accent-primary: #6E56CF;
-  --c-accent-secondary: #38BDF8;
-  --c-accent-warm: #F5A623;
-  --c-ink-primary: #F5F5F7;
-  --c-ink-muted: #8B8B99;
-  --c-ink-faint: #54546A;
-  --c-border-subtle: #24243A;
+  --c-void: #05050A;
+  --c-surface: #0C0C14;
+  --c-surface2: #121220;
+  --c-accent-primary: #4285F4;
+  --c-accent-secondary: #34A853;
+  --c-accent-warm: #EA4335;
+  --c-ink-primary: #F9FAFB;
+  --c-ink-muted: #9CA3AF;
+  --c-ink-faint: #4B5563;
+  --c-border-subtle: #1F2937;
+  --grid-color: rgba(31, 41, 55, 0.45);
 }
 
 html.light {
   --c-void: #FFFFFF;
-  --c-surface: #F5F5F8;
-  --c-surface2: #ECECF2;
-  --c-accent-primary: #6E56CF;
-  --c-accent-secondary: #2C8FC9;
-  --c-accent-warm: #C97A12;
-  --c-ink-primary: #14141F;
-  --c-ink-muted: #55556A;
-  --c-ink-faint: #8B8B99;
-  --c-border-subtle: #E2E2EA;
+  --c-surface: #FFFFFF;
+  --c-surface2: #F8F9FA;
+  --c-accent-primary: #4285F4;
+  --c-accent-secondary: #34A853;
+  --c-accent-warm: #EA4335;
+  --c-ink-primary: #111827;
+  --c-ink-muted: #4B5563;
+  --c-ink-faint: #9CA3AF;
+  --grid-color: rgba(229, 231, 235, 0.55);
+}
+
+.force-dark {
+  --c-void: #05050A;
+  --c-surface: #0C0C14;
+  --c-surface2: #121220;
+  --c-accent-primary: #4285F4;
+  --c-accent-secondary: #34A853;
+  --c-accent-warm: #EA4335;
+  --c-ink-primary: #F9FAFB;
+  --c-ink-muted: #9CA3AF;
+  --c-ink-faint: #4B5563;
+  --c-border-subtle: #1F2937;
+  --grid-color: rgba(31, 41, 55, 0.45);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -74,7 +89,7 @@ body {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #6E56CF 0%, #38BDF8 100%);
+  background: linear-gradient(135deg, #4285F4 0%, #8B5CF6 50%, #EA4335 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -85,3 +100,22 @@ body {
   outline-offset: 3px;
   border-radius: 4px;
 }
+
+.cursor-glow {
+  position: fixed;
+  left: var(--mouse-x, -9999px);
+  top: var(--mouse-y, -9999px);
+  pointer-events: none;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(66, 133, 244, 0.06) 0%, rgba(52, 168, 83, 0.03) 35%, rgba(0,0,0,0) 65%);
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+html:not(.light) .cursor-glow {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, rgba(168, 85, 247, 0.05) 45%, rgba(0,0,0,0) 65%);
+}
+

@@ -6,11 +6,11 @@ import { useEffect, useState } from "react";
 import client from "../api/client";
 
 const pageTransition = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-  transition: { duration: 0.4 },
-};
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -16 },
+  transition: { duration: 0.35, ease: "easeOut" },
+} as const;
 
 const galleryPhotos = [
   "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop",

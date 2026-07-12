@@ -28,7 +28,7 @@ export default function EventCard({ event, index = 0 }: { event: EventItem; inde
           alt={event.title}
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-void via-void/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
         <span className="eyebrow absolute left-4 top-4 rounded-full bg-void/70 px-3 py-1 text-[10px] text-accent-secondary backdrop-blur">
           {event.tag}
         </span>

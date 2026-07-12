@@ -6,14 +6,15 @@ import NetworkCanvas from "../components/NetworkCanvas";
 import ScrollReveal from "../components/ScrollReveal";
 import AnimatedCounter from "../components/AnimatedCounter";
 import EventCard from "../components/EventCard";
+import TiltCard from "../components/TiltCard";
 import client from "../api/client";
 
 const pageTransition = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-  transition: { duration: 0.4 },
-};
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -16 },
+  transition: { duration: 0.35, ease: "easeOut" },
+} as const;
 
 const whyJoin = [
   { icon: Code2, title: "Build real things", desc: "Ship projects, hackathon entries, and open-source contributions with people who care about craft." },
@@ -52,8 +53,24 @@ export default function Home() {
   return (
     <motion.main {...pageTransition}>
       <section className="relative flex min-h-screen items-center overflow-hidden pt-20">
-        <NetworkCanvas />
-        <div className="relative z-10 mx-auto max-w-6xl px-6">
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0"
+        >
+          <source src="/video/background.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-white/95 dark:bg-black/75 z-10" />
+
+        {/* Interactive network canvas layered on top of video overlay */}
+        <div className="absolute inset-0 z-20">
+          <NetworkCanvas />
+        </div>
+ 
+        <div className="relative z-30 mx-auto max-w-6xl px-6">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -62,16 +79,28 @@ export default function Home() {
           >
             // association_for_computing_machinery
           </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35, duration: 0.6 }}
-            className="mt-6 max-w-3xl font-display text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl"
-          >
-            Where PES MCOE
-            <br />
-            <span className="text-gradient">compiles its coders.</span>
-          </motion.h1>
+          <h1 className="mt-6 max-w-3xl font-display text-5xl font-semibold leading-[1.1] tracking-tight md:text-7xl">
+            <div className="overflow-hidden py-1">
+              <motion.span
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
+                className="block"
+              >
+                Where PES MCOE
+              </motion.span>
+            </div>
+            <div className="overflow-hidden py-1">
+              <motion.span
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                transition={{ delay: 0.45, duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
+                className="text-gradient block"
+              >
+                compiles its coders.
+              </motion.span>
+            </div>
+          </h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -90,27 +119,27 @@ export default function Home() {
           >
             <Link
               to="/contact"
-              className="group flex items-center gap-2 rounded-full bg-grad-signal px-6 py-3 text-sm font-medium text-void transition-transform hover:scale-105"
+              className="group flex items-center gap-2 rounded-full bg-ink-primary px-6 py-3 text-sm font-medium text-void transition-transform hover:scale-105 shadow-sm"
             >
               Join ACM <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               to="/events"
-              className="rounded-full border border-bordersubtle px-6 py-3 text-sm font-medium text-ink-primary transition-colors hover:border-accent-secondary"
+              className="rounded-full border border-bordersubtle bg-surface2/30 px-6 py-3 text-sm font-medium text-ink-primary transition-colors hover:border-accent-primary"
             >
               See upcoming events
             </Link>
           </motion.div>
         </div>
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[10px] text-ink-faint"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[10px] text-ink-faint z-30"
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
           scroll ↓
         </motion.div>
       </section>
-
+ 
       <section className="mx-auto max-w-6xl px-6 py-24">
         <ScrollReveal>
           <p className="eyebrow text-xs text-accent-secondary">// about_acm</p>
@@ -136,11 +165,13 @@ export default function Home() {
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {whyJoin.map((item, i) => (
             <ScrollReveal key={item.title} delay={i * 0.08}>
-              <div className="group rounded-2xl border border-bordersubtle bg-surface p-6 transition-colors hover:border-accent-primary/50">
-                <item.icon className="text-accent-secondary" size={22} />
-                <h3 className="mt-4 font-display text-lg font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm text-ink-muted">{item.desc}</p>
-              </div>
+              <TiltCard className="h-full">
+                <div className="group rounded-2xl border border-bordersubtle bg-surface p-6 transition-colors hover:border-accent-primary/50 h-full">
+                  <item.icon className="text-accent-secondary" size={22} />
+                  <h3 className="mt-4 font-display text-lg font-semibold text-ink-primary">{item.title}</h3>
+                  <p className="mt-2 text-sm text-ink-muted leading-relaxed">{item.desc}</p>
+                </div>
+              </TiltCard>
             </ScrollReveal>
           ))}
         </div>

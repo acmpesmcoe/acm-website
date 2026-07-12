@@ -47,15 +47,25 @@ export default function TeamCard({ member, index = 0 }: { member: Member; index?
       >
         <div className="relative h-56 overflow-hidden">
           <img src={member.image} alt={member.name} className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-void via-void/10 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/5 to-transparent" />
           <div className="absolute bottom-3 right-3 flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
             {member.github && (
-              <a href={member.github} className="flex h-8 w-8 items-center justify-center rounded-full bg-void/80 text-ink-primary backdrop-blur hover:text-accent-secondary">
+              <a
+                href={member.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-void/80 text-ink-primary backdrop-blur hover:text-accent-secondary"
+              >
                 <Github size={14} />
               </a>
             )}
             {member.linkedin && (
-              <a href={member.linkedin} className="flex h-8 w-8 items-center justify-center rounded-full bg-void/80 text-ink-primary backdrop-blur hover:text-accent-secondary">
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-void/80 text-ink-primary backdrop-blur hover:text-accent-secondary"
+              >
                 <Linkedin size={14} />
               </a>
             )}

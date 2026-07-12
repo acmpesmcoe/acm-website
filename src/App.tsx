@@ -17,12 +17,22 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
+      document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  useEffect(() => {
     const t = setTimeout(() => setLoading(false), 1400);
     return () => clearTimeout(t);
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-void text-ink-primary font-body">
+    <div className="relative min-h-screen bg-void text-ink-primary font-body overflow-hidden">
+      <div className="cursor-glow" />
       <AnimatePresence>{loading && <PageLoader />}</AnimatePresence>
       <Navbar />
       <AnimatePresence mode="wait">

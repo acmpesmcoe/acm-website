@@ -7,7 +7,8 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 font-display text-lg font-semibold">
+            <div className="flex items-center gap-3 font-display text-lg font-semibold">
+              <img src="/logo/pes-logo.png" alt="PES MCOE logo" className="h-20 w-20 object-contain" />
               <img src="/logo/acm-logo.png" alt="ACM logo" className="h-20 w-20 object-contain" />
               ACM · PES MCOE
             </div>

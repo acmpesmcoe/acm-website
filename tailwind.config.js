@@ -20,13 +20,13 @@ export default {
         bordersubtle: "var(--c-border-subtle)",
       },
       fontFamily: {
-        display: ["Space Grotesk", "sans-serif"],
-        body: ["Inter", "sans-serif"],
+        display: ["Outfit", "sans-serif"],
+        body: ["Plus Jakarta Sans", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
       },
       backgroundImage: {
-        "grad-signal": "linear-gradient(135deg, #6E56CF 0%, #38BDF8 100%)",
-        "grad-warm": "linear-gradient(135deg, #F5A623 0%, #6E56CF 100%)",
+        "grad-signal": "linear-gradient(135deg, #4285F4 0%, #8B5CF6 50%, #EA4335 100%)",
+        "grad-warm": "linear-gradient(135deg, #EA4335 0%, #FBBC05 100%)",
       },
     },
   },

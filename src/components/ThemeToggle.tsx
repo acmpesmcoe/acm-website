@@ -5,7 +5,7 @@ export default function ThemeToggle() {
   const [theme, setTheme] = useState<"dark" | "light">(() => {
     const stored = localStorage.getItem("acm-theme");
     if (stored === "light" || stored === "dark") return stored;
-    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    return "light";
   });
 
   useEffect(() => {
