@@ -4,29 +4,29 @@ export default {
   theme: {
     extend: {
       colors: {
-        void: "#0B0B12",
-        surface: "#14141F",
-        surface2: "#1B1B29",
+        void: "var(--c-void)",
+        surface: "var(--c-surface)",
+        surface2: "var(--c-surface2)",
         accent: {
-          primary: "#6E56CF",
-          secondary: "#38BDF8",
-          warm: "#F5A623",
-          danger: "#E5484D",
+          primary: "var(--c-accent-primary)",
+          secondary: "var(--c-accent-secondary)",
+          warm: "var(--c-accent-warm)",
+          danger: "var(--c-accent-danger)",
         },
         ink: {
-          primary: "#F5F5F7",
-          muted: "#8B8B99",
-          faint: "#54546A",
+          primary: "var(--c-ink-primary)",
+          muted: "var(--c-ink-muted)",
+          faint: "var(--c-ink-faint)",
         },
-        bordersubtle: "#24243A",
+        bordersubtle: "var(--c-border-subtle)",
       },
       fontFamily: {
-        display: ["Space Grotesk", "sans-serif"],
-        body: ["Inter", "sans-serif"],
+        display: ["Outfit", "sans-serif"],
+        body: ["Plus Jakarta Sans", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
       },
       backgroundImage: {
-        "grad-signal": "linear-gradient(135deg, #6E56CF 0%, #38BDF8 100%)",
+        "grad-signal": "linear-gradient(135deg, #4285F4 0%, #8B5CF6 50%, #EA4335 100%)",
       },
     },
   },
