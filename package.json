@@ -5,5 +5,17 @@
   "description": "Monorepo for ACM PES MCOE: public site, admin dashboard, and backend API",
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:admin": "npm run dev --workspace=apps/admin",
+    "dev:server": "npm run dev --workspace=apps/server",
+    "dev:all": "concurrently -n web,admin,server -c blue,magenta,green \"npm run dev:web\" \"npm run dev:admin\" \"npm run dev:server\"",
+    "build:web": "npm run build --workspace=apps/web",
+    "build:admin": "npm run build --workspace=apps/admin",
+    "install:all": "npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
 }

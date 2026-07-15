@@ -1,8 +1,7 @@
-# ACM PES MCOE — Website (Phase 1)
+# ACM PES MCOE — Public Website
 
-Phase 1 build of the ACM student chapter website, per the SRS: a fully
-functional public site with a premium, animated UI inspired by Apple,
-Vercel, and Linear.
+> **Part of the [acm-website](../../README.md) monorepo** — see root README for
+> setup, installation, and running instructions.
 
 ## Tech stack
 - React 19 + TypeScript (Vite)
@@ -12,32 +11,22 @@ Vercel, and Linear.
 - react-router-dom
 - lucide-react icons
 
-## Pages included
+## Pages
 - **Home** — hero, intro, why join, upcoming events preview, animated stats, featured photos, join CTA
 - **About** — ACM overview, chapter overview, mission & vision, faculty coordinator
 - **Events** — upcoming/past tabs, event gallery, registration section
 - **Team** — faculty mentors + core members as 3D tilt cards with GitHub/LinkedIn links
 - **Contact** — contact form, email, socials, college location
 
-## Run locally
-```bash
-npm install
-npm run dev
-```
-Visit http://localhost:5173
-
 ## Production build
 ```bash
-npm run build
-npm run preview
+npm run build:web    # from the repo root
 ```
 Output goes to `dist/`.
 
 ## Deploy
-- **Vercel**: import the repo, framework preset "Vite", no config needed.
-- **GitHub Pages**: run `npm run build`, then deploy the `dist/` folder
-  (e.g. with the `gh-pages` package or a GitHub Actions workflow).
-
+- **Vercel**: import the repo, set root directory to `apps/web`, framework preset "Vite".
+- See the [root README](../../README.md) for full deployment instructions.
 
 ## Design notes
 - Palette: near-black void background with a violet→cyan signal gradient

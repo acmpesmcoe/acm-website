@@ -1,8 +1,11 @@
-# ACM PES MCOE — Admin Dashboard (Phase 2)
+# ACM PES MCOE — Admin Dashboard
+
+> **Part of the [acm-website](../../README.md) monorepo** — see root README for
+> setup, installation, and running instructions.
 
 A separate React app for managing the content behind the public ACM website:
 events, team members, alumni, and contact form submissions. Talks to the
-`acm-backend` API you already set up.
+backend API (`apps/server`).
 
 ## Tech stack
 - React + TypeScript (Vite)
@@ -18,50 +21,16 @@ events, team members, alumni, and contact form submissions. Talks to the
 - **Alumni** — create, edit, delete
 - **Messages** — view contact form submissions, mark read, delete
 
-## Run locally
-
-Make sure your backend (`acm-backend`) is already running first — this
-dashboard is useless without it.
-
+## Production build
 ```bash
-npm install
-cp .env.example .env
+npm run build:admin    # from the repo root
 ```
-
-Open `.env` and confirm `VITE_API_URL` points at your backend:
-```
-VITE_API_URL=http://localhost:5000/api
-```
-
-Then:
-```bash
-npm run dev
-```
-
-Visit the URL it prints (usually `http://localhost:5173` — if that's taken
-by your other project, Vite will pick the next free port automatically, or
-run it with `-- --port 5174` to force one).
-
-Log in with the same email/password you set as `SEED_ADMIN_EMAIL` /
-`SEED_ADMIN_PASSWORD` when you ran `npm run seed:admin` in the backend.
 
 ## Deploy
-
-Same pattern as your public site:
-1. Push this to its own GitHub repo
-2. Import into Vercel
-3. In Vercel's project settings, add an environment variable:
-   ```
-   VITE_API_URL=https://your-deployed-backend-url.onrender.com/api
-   ```
-4. Also update `CORS_ORIGINS` in your **backend's** environment variables
-   to include this dashboard's deployed URL, so the browser is allowed to
-   call the API from there.
-
-Consider **not** linking to this dashboard from your public site's nav —
-keep the URL semi-private (bookmark it yourself) since it's the door to
-editing all your content. A login screen protects it either way, but no
-need to advertise it.
+- **Vercel**: import the repo, set root directory to `apps/admin`, framework preset "Vite".
+- Add `VITE_API_URL` env variable pointing to your deployed backend.
+- Update `CORS_ORIGINS` in the backend's env to include this dashboard's URL.
+- See the [root README](../../README.md) for full deployment instructions.
 
 ## What's intentionally not built yet
 

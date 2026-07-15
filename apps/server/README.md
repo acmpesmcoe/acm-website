@@ -1,8 +1,11 @@
-# ACM PES MCOE — Backend (Phase 2)
+# ACM PES MCOE — Backend API
+
+> **Part of the [acm-website](../../README.md) monorepo** — see root README for
+> setup, installation, and running instructions.
 
 A Node.js + Express + MongoDB API that powers the admin side of the ACM
 website: login, event management, team management, alumni management, and
-contact form storage — matching the SRS's Phase 2 spec.
+contact form storage.
 
 ## Tech stack
 - Node.js + Express
@@ -12,7 +15,7 @@ contact form storage — matching the SRS's Phase 2 spec.
 
 ---
 
-## Part 1 — Set up MongoDB Atlas (one-time, ~5 minutes)
+## MongoDB Atlas Setup (one-time, ~5 minutes)
 
 MongoDB Atlas is a free, cloud-hosted MongoDB database — you don't need to
 install or run a database on your own laptop.
@@ -38,48 +41,7 @@ install or run a database on your own laptop.
    mongodb+srv://myuser:mypassword@cluster0.xxxxx.mongodb.net/acm-website?retryWrites=true&w=majority
    ```
 
-Keep this string handy for the next part.
-
----
-
-## Part 2 — Run the backend locally
-
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-2. Create your real `.env` file from the example:
-   ```bash
-   cp .env.example .env
-   ```
-
-3. Open `.env` and fill in:
-   - `MONGODB_URI` — the connection string from Part 1
-   - `JWT_SECRET` — any long random string. Generate one with:
-     ```bash
-     node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
-     ```
-   - `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD` — the login you'll use to
-     access the admin dashboard (once built) or call protected API routes
-
-4. Create your first admin login:
-   ```bash
-   npm run seed:admin
-   ```
-   You should see `Created admin: your-email@example.com`.
-
-5. Start the server:
-   ```bash
-   npm run dev
-   ```
-   You should see `MongoDB connected` and `ACM backend running on
-   http://localhost:5000`.
-
-6. Test it's alive:
-   ```bash
-   curl http://localhost:5000/api/health
-   ```
+Paste this connection string into `apps/server/.env` as `MONGODB_URI`.
 
 ---
 
@@ -133,51 +95,24 @@ Include the token from `/auth/login` in the `Authorization` header:
 Authorization: Bearer <token>
 ```
 
-Example login + create event with `curl`:
-```bash
-# Log in
-curl -X POST http://localhost:5000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"admin@example.com","password":"your-password"}'
-
-# Copy the "token" from the response, then:
-curl -X POST http://localhost:5000/api/events \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer PASTE_TOKEN_HERE" \
-  -d '{"title":"HackMCOE 2026","date":"2026-08-22","tag":"Hackathon","description":"24-hour build sprint."}'
-```
-
 ---
 
-## Part 3 — Deploy the backend (when ready)
+## Deploy (Render)
 
-**Render** (matches the SRS) is a good free option:
-
-1. Push this `acm-backend` folder to its own GitHub repo (separate from the
-   frontend repo, or as a subfolder — either works).
-2. Go to **render.com** → sign up with GitHub → **New → Web Service**.
-3. Connect the repo. Set:
-   - **Build Command**: `npm install`
-   - **Start Command**: `npm start`
-4. Add all the same variables from your `.env` file under **Environment**.
-5. Deploy. Render gives you a URL like `https://acm-backend.onrender.com`.
-6. Update `CORS_ORIGINS` in Render's environment variables to include your
-   real deployed frontend URL (e.g. `https://acm-blond.vercel.app`), so the
-   browser is allowed to call the API from there.
-7. On the frontend, you'll then point API calls at this Render URL instead
-   of `localhost:5000`.
+1. Connect this repo to Render → **New → Web Service**
+2. Set **Root Directory** to `apps/server`
+3. **Build Command:** `npm install`
+4. **Start Command:** `npm start`
+5. Add all env variables from `.env.example`
+6. Update `CORS_ORIGINS` to include your deployed frontend URLs
 
 Note: Render's free tier "sleeps" after inactivity, so the first request
-after a while can take ~30-60 seconds to wake up. Fine for a student
-project; worth knowing about.
+after a while can take ~30-60 seconds to wake up.
 
 ---
 
 ## What's intentionally not built yet
 
-- The actual **admin dashboard UI** (a frontend page where you log in and
-  see forms to add/edit events, team, alumni) — this backend exposes the
-  API; the dashboard is the next piece to build on top of it.
 - File uploads for images (SRS mentions Cloudinary for this) — for now,
   `image` fields expect a URL string, same as the frontend currently uses.
 - Role-based permissions beyond `admin`/`superadmin` (SRS mentions this as
