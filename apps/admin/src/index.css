@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-void: #05050A;
+  --c-surface: #0C0C14;
+  --c-surface2: #121220;
+  --c-accent-primary: #4285F4;
+  --c-accent-secondary: #34A853;
+  --c-accent-warm: #EA4335;
+  --c-accent-danger: #E5484D;
+  --c-ink-primary: #F9FAFB;
+  --c-ink-muted: #9CA3AF;
+  --c-ink-faint: #4B5563;
+  --c-border-subtle: #1F2937;
+}
+
+html.light {
+  --c-void: #FFFFFF;
+  --c-surface: #F9FAFB;
+  --c-surface2: #F3F4F6;
+  --c-accent-primary: #4285F4;
+  --c-accent-secondary: #34A853;
+  --c-accent-warm: #EA4335;
+  --c-accent-danger: #E5484D;
+  --c-ink-primary: #111827;
+  --c-ink-muted: #4B5563;
+  --c-ink-faint: #9CA3AF;
+  --c-border-subtle: #E5E7EB;
+}
+
+body {
+  background-color: var(--c-void);
+  color: var(--c-ink-primary);
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--c-void); }
+::-webkit-scrollbar-thumb { background: var(--c-border-subtle); border-radius: 6px; }
+
+.eyebrow { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em; }
+
+input, textarea, select {
+  color-scheme: dark;
+}
+
+html.light input, html.light textarea, html.light select {
+  color-scheme: light;
+}
