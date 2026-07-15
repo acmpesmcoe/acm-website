@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Calendar, ArrowUpRight } from "lucide-react";
 import Modal from "./Modal";
+import { getCategoryStyles } from "../data/eventColors";
 
 interface EventItem {
   _id: string;
@@ -13,8 +14,9 @@ interface EventItem {
   registrationLink?: string;
 }
 
-export default function EventCard({ event, index = 0, isUpcoming = false }: { event: EventItem; index?: number; isUpcoming?: boolean }) {
+export default function EventCard({ event, index = 0, isUpcoming = false, isFeatured = false }: { event: EventItem; index?: number; isUpcoming?: boolean; isFeatured?: boolean }) {
   const [modalOpen, setModalOpen] = useState(false);
+  const styles = getCategoryStyles(event.tag);
 
   return (
     <>
@@ -25,7 +27,11 @@ export default function EventCard({ event, index = 0, isUpcoming = false }: { ev
         transition={{ duration: 0.5, delay: index * 0.08 }}
         whileHover={{ y: -6 }}
         onClick={() => setModalOpen(true)}
-        className="group relative overflow-hidden rounded-2xl border border-bordersubtle bg-surface cursor-pointer select-none"
+        className={`group relative overflow-hidden rounded-2xl border bg-surface cursor-pointer select-none transition-all duration-300 ${
+          isFeatured 
+            ? "border-accent-primary/60 dark:border-accent-primary/45 shadow-[0_0_18px_rgba(66,133,244,0.15)] shadow-black/10" 
+            : "border-bordersubtle shadow-sm"
+        }`}
       >
         <div className="relative h-44 overflow-hidden">
           <img
@@ -34,9 +40,14 @@ export default function EventCard({ event, index = 0, isUpcoming = false }: { ev
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
-          <span className="eyebrow absolute left-4 top-4 rounded-full bg-void/70 px-3 py-1 text-[10px] text-accent-secondary backdrop-blur">
+          <span className={`eyebrow absolute left-4 top-4 rounded-full px-3 py-1 text-[10px] border font-semibold ${styles.bg} ${styles.text} ${styles.border} backdrop-blur-md`}>
             {event.tag}
           </span>
+          {isFeatured && (
+            <span className="eyebrow absolute right-4 top-4 rounded-full bg-accent-primary/95 text-void px-3 py-1 text-[10px] font-bold tracking-wider uppercase shadow-sm">
+              Next Up
+            </span>
+          )}
         </div>
         <div className="p-5">
           <div className="flex items-center gap-2 font-mono text-xs text-ink-muted">
@@ -61,7 +72,7 @@ export default function EventCard({ event, index = 0, isUpcoming = false }: { ev
           <div className="flex items-center gap-1.5">
             <Calendar size={14} /> {event.date}
           </div>
-          <span className="rounded-full bg-void/50 px-2.5 py-0.5 text-accent-secondary border border-bordersubtle/30">
+          <span className={`rounded-full px-2.5 py-0.5 border ${styles.bg} ${styles.text} ${styles.border}`}>
             {event.tag}
           </span>
         </div>

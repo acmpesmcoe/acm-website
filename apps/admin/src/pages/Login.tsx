@@ -33,7 +33,7 @@ export default function Login() {
             {"{}"}
           </span>
           <h1 className="mt-4 font-display text-2xl font-semibold">ACM Admin</h1>
-          <p className="mt-1 text-sm text-ink-muted">PES MCOE chapter dashboard</p>
+          <p className="mt-1 text-sm text-ink-muted">PES's MCOE ACM Student Chapter Dashboard</p>
         </div>
 
         <form onSubmit={handleSubmit} className="rounded-2xl border border-bordersubtle bg-surface p-6">

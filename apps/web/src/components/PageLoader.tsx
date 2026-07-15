@@ -57,7 +57,7 @@ export default function PageLoader() {
           {/* Full Solid Brand Logo Image Layer (fades in on top) */}
           <motion.img
             src="/logo/acm-logo-neon.png"
-            alt="ACM PES MCOE Logo"
+            alt="PES's MCOE ACM Student Chapter Logo"
             className="absolute h-[93%] w-[93%] object-contain z-10"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}

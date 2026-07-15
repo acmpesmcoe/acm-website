@@ -3,6 +3,7 @@ import { Calendar, ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import client from "../api/client";
+import { getCategoryStyles } from "../data/eventColors";
 
 const pageTransition = {
   initial: { opacity: 0, y: 16 },
@@ -16,6 +17,7 @@ export default function EventDetails() {
   const [event, setEvent] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const styles = event ? getCategoryStyles(event.tag) : { bg: "", text: "", border: "" };
 
   useEffect(() => {
     setLoading(true);
@@ -64,7 +66,7 @@ export default function EventDetails() {
                   className="h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
-                <span className="eyebrow absolute left-4 top-4 rounded-full bg-void/70 px-3 py-1 text-[10px] text-accent-secondary backdrop-blur">
+                <span className={`eyebrow absolute left-4 top-4 rounded-full px-3 py-1 text-[10px] border font-semibold ${styles.bg} ${styles.text} ${styles.border} backdrop-blur-md`}>
                   {event.tag}
                 </span>
               </div>

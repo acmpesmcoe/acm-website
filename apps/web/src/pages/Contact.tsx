@@ -118,6 +118,9 @@ export default function Contact() {
                 <a href="mailto:acm@pesmcoe.edu.in" className="mt-3 flex items-center gap-3 text-sm hover:text-accent-secondary">
                   <Mail size={16} /> acm@pesmcoe.edu.in
                 </a>
+                <p className="mt-2 text-xs text-ink-faint">
+                  Replies within a couple of days.
+                </p>
               </div>
               <div className="rounded-2xl border border-bordersubtle bg-surface p-6">
                 <p className="eyebrow text-xs text-accent-secondary">// location</p>

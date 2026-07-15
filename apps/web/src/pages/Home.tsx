@@ -98,9 +98,9 @@ export default function Home() {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="mt-6 max-w-xl text-lg text-ink-muted"
           >
-            The official student chapter of ACM at PES Modern College of
-            Engineering. Hackathons, workshops, and a network of people who
-            build for the love of it.
+            PES's MCOE ACM Student Chapter is the official student chapter of the
+            Association for Computing Machinery at PES Modern College of Engineering.
+            Hackathons, workshops, and a network of people who build for the love of it.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -140,8 +140,8 @@ export default function Home() {
           </h2>
           <p className="mt-6 max-w-2xl text-ink-muted">
             Founded in 1947, the Association for Computing Machinery connects
-            students, educators, and professionals across the world. Our
-            chapter at PES MCOE brings that global network to Pune: peer
+            students, educators, and professionals across the world.
+            PES's MCOE ACM Student Chapter brings that global network to Pune: peer
             learning, technical events, and a straight line into the wider
             computing community.
           </p>
@@ -182,7 +182,7 @@ export default function Home() {
         </ScrollReveal>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {upcomingEvents.map((e, i) => (
-            <EventCard key={e._id} event={e} index={i} isUpcoming={true} />
+            <EventCard key={e._id} event={e} index={i} isUpcoming={true} isFeatured={i === 0} />
           ))}
         </div>
       </section>

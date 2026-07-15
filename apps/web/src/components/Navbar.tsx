@@ -54,19 +54,19 @@ export default function Navbar() {
                 className="h-10 w-10 object-contain"
               />
             </div>
-            <span>
-              ACM <span className="text-ink-muted hidden sm:inline">· PES MCOE</span>
+            <span className="text-[10px] sm:text-xs md:text-[11px] lg:text-xs font-semibold leading-tight max-w-[140px] sm:max-w-[180px] md:max-w-none md:whitespace-nowrap">
+              PES's MCOE ACM Student Chapter
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="hidden items-center gap-1 lg:gap-2 md:flex">
             {links.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
                 className={({ isActive }) =>
-                  `relative px-3.5 py-1.5 font-mono text-xs transition-colors z-10 ${
+                  `relative px-2 lg:px-3.5 py-1.5 font-mono text-xs transition-colors z-10 ${
                     isActive
                       ? "text-ink-primary font-medium"
                       : "text-ink-muted hover:text-ink-primary"

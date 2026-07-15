@@ -7,15 +7,17 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3 font-display text-lg font-semibold">
-              <img src="/logo/pes-logo.png" alt="PES MCOE logo" className="h-20 w-20 object-contain" />
-              <img src="/logo/acm-logo.png" alt="ACM logo" className="h-20 w-20 object-contain" />
-              ACM · PES MCOE
+            <div className="flex items-center gap-3 font-display text-base font-semibold leading-tight">
+              <div className="flex items-center gap-1.5 shrink-0">
+                <img src="/logo/pes-logo.png" alt="PES's MCOE ACM Student Chapter logo" className="h-16 w-16 object-contain" />
+                <img src="/logo/acm-logo.png" alt="PES's MCOE ACM Student Chapter logo" className="h-16 w-16 object-contain" />
+              </div>
+              <span className="max-w-[200px] md:max-w-xs">PES's MCOE ACM Student Chapter</span>
             </div>
             <p className="mt-4 max-w-sm text-sm text-ink-muted">
-              The official student chapter of the Association for Computing
-              Machinery at PES Modern College of Engineering, Pune. Building a
-              community of builders, one commit at a time.
+              PES's MCOE ACM Student Chapter is the official student chapter of the
+              Association for Computing Machinery at PES Modern College of Engineering, Pune.
+              Building a community of builders, one commit at a time.
             </p>
             <div className="mt-5 flex gap-4">
               <a
@@ -53,6 +55,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2 text-sm text-ink-muted">
               <li><Link to="/about" className="hover:text-ink-primary">About</Link></li>
               <li><Link to="/events" className="hover:text-ink-primary">Events</Link></li>
+              <li><Link to="/events" className="hover:text-ink-primary">Latest Event</Link></li>
               <li><Link to="/team" className="hover:text-ink-primary">Team</Link></li>
               <li><Link to="/contact" className="hover:text-ink-primary">Contact</Link></li>
             </ul>
@@ -68,7 +71,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-bordersubtle pt-6 text-xs text-ink-faint md:flex-row">
-          <p>© {new Date().getFullYear()} ACM Student Chapter, PES MCOE. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} PES's MCOE ACM Student Chapter. All rights reserved.</p>
           <p className="font-mono">built by students, for students</p>
         </div>
       </div>

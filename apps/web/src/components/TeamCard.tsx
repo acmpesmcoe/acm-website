@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 interface Member {
   name: string;
@@ -8,6 +8,10 @@ interface Member {
   image: string;
   github?: string;
   linkedin?: string;
+  email?: string;
+  focus?: string;
+  currentPosition?: string;
+  batch?: string;
 }
 
 function getInitials(name: string) {
@@ -98,11 +102,31 @@ export default function TeamCard({ member, index = 0 }: { member: Member; index?
                 <Linkedin size={14} />
               </a>
             )}
+            {member.email && (
+              <a
+                href={`mailto:${member.email}`}
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-void/80 text-ink-primary backdrop-blur hover:text-accent-secondary"
+              >
+                <Mail size={14} />
+              </a>
+            )}
           </div>
         </div>
         <div className="p-4" style={{ transform: "translateZ(20px)" }}>
           <h3 className="font-display text-base font-semibold text-ink-primary">{member.name}</h3>
-          <p className="mt-1 font-mono text-xs text-accent-secondary">{member.role}</p>
+          {member.currentPosition ? (
+            <>
+              <p className="mt-1 font-mono text-xs text-accent-primary font-medium">{member.currentPosition}</p>
+              <p className="mt-2 text-xs text-ink-faint font-mono">{member.role} · {member.batch}</p>
+            </>
+          ) : (
+            <>
+              <p className="mt-1 font-mono text-xs text-accent-secondary">{member.role}</p>
+              {member.focus && (
+                <p className="mt-2 text-xs text-ink-muted line-clamp-1">{member.focus}</p>
+              )}
+            </>
+          )}
         </div>
       </motion.div>
     </motion.div>

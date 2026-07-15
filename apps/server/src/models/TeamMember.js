@@ -8,6 +8,8 @@ const teamMemberSchema = new mongoose.Schema(
     image: { type: String, default: "" },
     github: { type: String, default: "" },
     linkedin: { type: String, default: "" },
+    email: { type: String, default: "" },
+    focus: { type: String, default: "" },
     order: { type: Number, default: 0 },
   },
   { timestamps: true }

@@ -58,9 +58,9 @@ export default function About() {
       <section className="mx-auto max-w-4xl px-6 py-16">
         <ScrollReveal>
           <p className="eyebrow text-xs text-accent-secondary">// pes_mcoe_chapter</p>
-          <h2 className="mt-4 font-display text-3xl font-semibold">About the PES MCOE chapter</h2>
+          <h2 className="mt-4 font-display text-3xl font-semibold">About PES's MCOE ACM Student Chapter</h2>
           <p className="mt-6 text-ink-muted">
-            Our chapter brings ACM's global mission to PES Modern College of
+            PES's MCOE ACM Student Chapter brings ACM's global mission to PES Modern College of
             Engineering, Pune. We run hands-on workshops, technical talks,
             hackathons, and peer-mentoring programs that help students go
             from writing their first "Hello, World" to shipping production

@@ -60,17 +60,14 @@ export default function Alumni() {
                 <TeamCard
                   member={{
                     name: a.name,
-                    role: `${a.role} · ${a.batch}`,
+                    role: a.role,
                     image: a.image || "",
                     linkedin: a.linkedin,
+                    currentPosition: a.currentPosition,
+                    batch: a.batch,
                   }}
                   index={i}
                 />
-                {a.currentPosition && (
-                  <p className="mt-3 text-center text-sm text-ink-muted">
-                    {a.currentPosition}
-                  </p>
-                )}
               </div>
             ))}
           </div>
