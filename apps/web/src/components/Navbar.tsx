@@ -13,8 +13,6 @@ const links = [
   { to: "/contact", label: "Contact" },
 ];
 
-const ADMIN_URL = import.meta.env.VITE_ADMIN_URL || "http://localhost:5173";
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -90,16 +88,6 @@ export default function Navbar() {
               </NavLink>
             ))}
 
-            {/* Admin Link */}
-            <a
-              href={ADMIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3.5 py-1.5 font-mono text-xs text-ink-muted hover:text-ink-primary"
-            >
-              Admin
-            </a>
-
             <div className="h-4 w-[1px] bg-bordersubtle mx-1.5" />
 
             <ThemeToggle />
@@ -147,16 +135,6 @@ export default function Navbar() {
                   </NavLink>
                 ))}
 
-                {/* Admin Link */}
-                <a
-                  href={ADMIN_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setOpen(false)}
-                  className="font-mono text-xs text-ink-muted hover:text-ink-primary"
-                >
-                  Admin
-                </a>
 
                 <Link
                   to="/contact"

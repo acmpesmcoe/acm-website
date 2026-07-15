@@ -89,7 +89,7 @@ export default function Events() {
 ) : (
   list.map((e, i) => (
               <div key={e._id}>
-                <EventCard event={e} index={i} />
+                <EventCard event={e} index={i} isUpcoming={tab === "upcoming"} />
                 {tab === "upcoming" && (
                   <Link
                     to={`/events/${e._id}`}

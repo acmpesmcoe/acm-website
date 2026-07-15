@@ -11,8 +11,24 @@ const pageTransition = {
   transition: { duration: 0.35, ease: "easeOut" },
 } as const;
 
+function getInitials(name: string) {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  
+  const titleWords = ["dr.", "dr", "prof.", "prof", "mr.", "mr", "ms.", "ms", "mrs.", "mrs", "maam", "ma'am", "sir"];
+  const cleanParts = parts.filter(p => !titleWords.includes(p.toLowerCase()));
+  
+  const targetParts = cleanParts.length > 0 ? cleanParts : parts;
+  
+  if (targetParts.length === 1) {
+    return targetParts[0].substring(0, 2).toUpperCase();
+  }
+  return (targetParts[0][0] + targetParts[targetParts.length - 1][0]).toUpperCase();
+}
+
 export default function About() {
   const [facultyMentors, setFacultyMentors] = useState<any[]>([]);
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     client.get("/team").then((res) => {
@@ -94,7 +110,20 @@ export default function About() {
             {facultyMentors.map((f, i) => (
               <ScrollReveal key={f._id} delay={i * 0.1}>
                 <div className="flex items-center gap-4 rounded-2xl border border-bordersubtle bg-surface p-5">
-                  <img src={f.image} alt={f.name} className="h-16 w-16 rounded-full object-cover" />
+                  {!f.image || failedImages[f._id] ? (
+                    <div className="h-16 w-16 rounded-full bg-surface2 flex items-center justify-center font-display text-lg font-bold text-ink-muted select-none shrink-0 border border-bordersubtle/30">
+                      {getInitials(f.name)}
+                    </div>
+                  ) : (
+                    <img
+                      src={f.image}
+                      alt={f.name}
+                      className="h-16 w-16 rounded-full object-cover shrink-0"
+                      onError={() => {
+                        setFailedImages((prev) => ({ ...prev, [f._id]: true }));
+                      }}
+                    />
+                  )}
                   <div>
                     <h3 className="font-display font-semibold">{f.name}</h3>
                     <p className="font-mono text-xs text-accent-secondary">{f.role}</p>

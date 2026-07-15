@@ -52,20 +52,11 @@ export default function Home() {
 
   return (
     <motion.main {...pageTransition}>
-      <section className="relative flex min-h-screen items-center overflow-hidden pt-20">
-        {/* Background Video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0"
-        >
-          <source src="/video/background.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-white/95 dark:bg-black/75 z-10" />
+      <section className="relative flex min-h-screen items-center overflow-hidden pt-20 bg-gradient-to-br from-[#05050A] via-[#080816] to-[#05050A] force-dark">
+        {/* Dark radial gradient overlay for high text legibility and deep tech aesthetic */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(12,12,32,0.4)_0%,rgba(5,5,10,0.92)_100%)] z-10" />
 
-        {/* Interactive network canvas layered on top of video overlay */}
+        {/* Interactive network canvas layered on top of gradient overlay */}
         <div className="absolute inset-0 z-20">
           <NetworkCanvas />
         </div>
@@ -191,7 +182,7 @@ export default function Home() {
         </ScrollReveal>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {upcomingEvents.map((e, i) => (
-            <EventCard key={e._id} event={e} index={i} />
+            <EventCard key={e._id} event={e} index={i} isUpcoming={true} />
           ))}
         </div>
       </section>

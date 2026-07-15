@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Github, Linkedin } from "lucide-react";
 
@@ -10,10 +10,26 @@ interface Member {
   linkedin?: string;
 }
 
+function getInitials(name: string) {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  
+  const titleWords = ["dr.", "dr", "prof.", "prof", "mr.", "mr", "ms.", "ms", "mrs.", "mrs", "maam", "ma'am", "sir"];
+  const cleanParts = parts.filter(p => !titleWords.includes(p.toLowerCase()));
+  
+  const targetParts = cleanParts.length > 0 ? cleanParts : parts;
+  
+  if (targetParts.length === 1) {
+    return targetParts[0].substring(0, 2).toUpperCase();
+  }
+  return (targetParts[0][0] + targetParts[targetParts.length - 1][0]).toUpperCase();
+}
+
 export default function TeamCard({ member, index = 0 }: { member: Member; index?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
+  const [imgError, setImgError] = useState(false);
 
   const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [10, -10]), { stiffness: 200, damping: 20 });
   const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-10, 10]), { stiffness: 200, damping: 20 });
@@ -30,6 +46,8 @@ export default function TeamCard({ member, index = 0 }: { member: Member; index?
     y.set(0);
   };
 
+  const showFallback = !member.image || imgError;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -45,9 +63,20 @@ export default function TeamCard({ member, index = 0 }: { member: Member; index?
         style={{ rotateX, rotateY }}
         className="group relative overflow-hidden rounded-2xl border border-bordersubtle bg-surface"
       >
-        <div className="relative h-56 overflow-hidden">
-          <img src={member.image} alt={member.name} className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/5 to-transparent" />
+        <div className="relative h-56 overflow-hidden bg-surface2 flex items-center justify-center">
+          {showFallback ? (
+            <div className="font-display text-3xl font-bold text-ink-muted select-none">
+              {getInitials(member.name)}
+            </div>
+          ) : (
+            <img
+              src={member.image}
+              alt={member.name}
+              className="h-full w-full object-cover"
+              onError={() => setImgError(true)}
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/5 to-transparent pointer-events-none" />
           <div className="absolute bottom-3 right-3 flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
             {member.github && (
               <a
