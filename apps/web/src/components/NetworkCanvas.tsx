@@ -112,10 +112,9 @@ export default function NetworkCanvas() {
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
-      const isLight = document.documentElement.classList.contains("light");
       
       // Connection line colors
-      const lineStyle = isLight ? "rgba(229, 231, 235, 0.5)" : "rgba(31, 41, 55, 0.4)";
+      const lineStyle = "rgba(255, 255, 255, 0.15)";
       const cursorLineColor = "#4285F4";
       const cursorLineRgb = hexToRgb(cursorLineColor);
       const maxDist = 130;
@@ -188,7 +187,7 @@ export default function NetworkCanvas() {
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
         ctx.fillStyle = n.color;
-        ctx.globalAlpha = isLight ? 0.6 : 0.55;
+        ctx.globalAlpha = 0.65;
         ctx.fill();
       }
       ctx.globalAlpha = 1.0;

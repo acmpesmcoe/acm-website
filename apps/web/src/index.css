@@ -26,6 +26,7 @@ html.light {
   --c-ink-primary: #111827;
   --c-ink-muted: #4B5563;
   --c-ink-faint: #9CA3AF;
+  --c-border-subtle: #E5E7EB;
   --grid-color: rgba(229, 231, 235, 0.55);
 }
 

@@ -37,7 +37,7 @@ export default function Home() {
   useEffect(() => {
     client.get("/events").then((res) => {
       setUpcomingEvents(res.data.upcoming.slice(0, 3));
-    }).catch(() => {});
+    }).catch(() => { });
 
     client.get("/team").then((res) => {
       const total = res.data.faculty.length + res.data.core.length;
@@ -47,7 +47,7 @@ export default function Home() {
         { value: res.data.faculty.length, suffix: "", label: "faculty mentors" },
         { value: new Date().getFullYear() - 2022, suffix: "", label: "years running" },
       ]);
-    }).catch(() => {});
+    }).catch(() => { });
   }, []);
 
   return (
@@ -60,7 +60,7 @@ export default function Home() {
         <div className="absolute inset-0 z-20">
           <NetworkCanvas />
         </div>
- 
+
         <div className="relative z-30 mx-auto max-w-6xl px-6">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -76,7 +76,7 @@ export default function Home() {
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
-                className="block"
+                className="block text-white"
               >
                 Where PES MCOE
               </motion.span>
@@ -130,7 +130,7 @@ export default function Home() {
           scroll ↓
         </motion.div>
       </section>
- 
+
       <section className="mx-auto max-w-6xl px-6 py-24">
         <ScrollReveal>
           <p className="eyebrow text-xs text-accent-secondary">// about_acm</p>
@@ -176,7 +176,7 @@ export default function Home() {
               <h2 className="mt-4 font-display text-3xl font-semibold md:text-4xl">What's next</h2>
             </div>
             <Link to="/events" className="hidden font-mono text-sm text-accent-secondary hover:underline md:inline">
-              all events →
+              ALL EVENTS →
             </Link>
           </div>
         </ScrollReveal>
