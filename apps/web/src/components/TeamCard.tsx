@@ -14,20 +14,6 @@ interface Member {
   batch?: string;
 }
 
-function getInitials(name: string) {
-  const parts = name.trim().split(/\s+/).filter(Boolean);
-  if (parts.length === 0) return "?";
-  
-  const titleWords = ["dr.", "dr", "prof.", "prof", "mr.", "mr", "ms.", "ms", "mrs.", "mrs", "maam", "ma'am", "sir"];
-  const cleanParts = parts.filter(p => !titleWords.includes(p.toLowerCase()));
-  
-  const targetParts = cleanParts.length > 0 ? cleanParts : parts;
-  
-  if (targetParts.length === 1) {
-    return targetParts[0].substring(0, 2).toUpperCase();
-  }
-  return (targetParts[0][0] + targetParts[targetParts.length - 1][0]).toUpperCase();
-}
 
 export default function TeamCard({ member, index = 0 }: { member: Member; index?: number }) {
   const ref = useRef<HTMLDivElement>(null);
