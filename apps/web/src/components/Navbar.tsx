@@ -30,8 +30,10 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 transition-all duration-300 pointer-events-none">
       <nav
-        className={`flex flex-col w-full max-w-6xl rounded-[24px] transition-all duration-300 pointer-events-auto overflow-hidden glass-panel ${
-          scrolled || open ? "shadow-lg shadow-black/10" : ""
+        className={`flex flex-col w-full max-w-6xl rounded-[24px] transition-all duration-300 pointer-events-auto overflow-hidden ${
+          scrolled || open 
+            ? "bg-surface/85 backdrop-blur-xl border border-bordersubtle shadow-xl shadow-black/40" 
+            : "glass-panel"
         } ${isHomeHero ? "force-dark" : ""}`}
       >
         <div className="flex w-full items-center justify-between px-6 py-4">
