@@ -23,7 +23,7 @@ export default function About() {
   }, []);
 
   return (
-    <motion.main {...pageTransition} className="pt-32">
+    <motion.main {...pageTransition} className="pt-48">
       <section className="mx-auto max-w-4xl px-6">
         <ScrollReveal>
           <p className="eyebrow text-xs text-accent-secondary">// about_acm</p>

@@ -35,7 +35,7 @@ export default function Contact() {
   };
 
   return (
-    <motion.main {...pageTransition} className="pt-32">
+    <motion.main {...pageTransition} className="pt-48">
       <section className="mx-auto max-w-6xl px-6 pb-28">
         <ScrollReveal>
           <p className="eyebrow text-xs text-accent-secondary">// contact</p>
