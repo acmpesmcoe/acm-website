@@ -55,6 +55,7 @@ html.light {
 
 html {
   scroll-behavior: smooth;
+  font-size: 14px;
 }
 
 body {
@@ -62,6 +63,7 @@ body {
   color: var(--c-ink-primary);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  line-height: 1.7;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -121,3 +123,35 @@ html:not(.light) .cursor-glow {
   background: radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, rgba(168, 85, 247, 0.05) 45%, rgba(0,0,0,0) 65%);
 }
 
+/* Liquid Glass Utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+html.light .glass-panel {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05);
+}
+
+.glass-panel:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+html.light .glass-panel:hover {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.liquid-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  opacity: 0.6;
+  pointer-events: none;
+}

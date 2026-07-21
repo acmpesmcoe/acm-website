@@ -5,6 +5,7 @@ import Events from "./pages/Events";
 import Team from "./pages/Team";
 import Alumni from "./pages/Alumni";
 import Messages from "./pages/Messages";
+import Gallery from "./pages/Gallery";
 import DashboardLayout from "./components/DashboardLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/team" element={<Team />} />
         <Route path="/alumni" element={<Alumni />} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="/messages" element={<Messages />} />
       </Route>
     </Routes>

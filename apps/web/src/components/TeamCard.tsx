@@ -65,13 +65,15 @@ export default function TeamCard({ member, index = 0 }: { member: Member; index?
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ rotateX, rotateY }}
-        className="group relative overflow-hidden rounded-2xl border border-bordersubtle bg-surface"
+        className="group relative overflow-hidden rounded-2xl glass-panel"
       >
         <div className="relative h-56 overflow-hidden bg-surface2 flex items-center justify-center">
           {showFallback ? (
-            <div className="font-display text-3xl font-bold text-ink-muted select-none">
-              {getInitials(member.name)}
-            </div>
+            <img
+              src="/logo/fallback-logo.jpg"
+              alt={member.name}
+              className="h-full w-full object-cover"
+            />
           ) : (
             <img
               src={member.image}

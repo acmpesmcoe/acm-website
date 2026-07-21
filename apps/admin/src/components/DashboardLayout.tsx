@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { LayoutDashboard, CalendarDays, Users, GraduationCap, Mail, LogOut, Sun, Moon } from "lucide-react";
+import { LayoutDashboard, CalendarDays, Users, GraduationCap, Mail, LogOut, Sun, Moon, Image as ImageIcon } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
 const navItems = [
@@ -9,6 +9,7 @@ const navItems = [
   { to: "/team", label: "Team", icon: Users },
   { to: "/alumni", label: "Alumni", icon: GraduationCap },
   { to: "/messages", label: "Messages", icon: Mail },
+  { to: "/gallery", label: "Gallery", icon: ImageIcon },
 ];
 
 export default function DashboardLayout() {

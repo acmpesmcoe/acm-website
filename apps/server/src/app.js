@@ -9,6 +9,7 @@ import eventRoutes from "./routes/eventRoutes.js";
 import teamRoutes from "./routes/teamRoutes.js";
 import alumniRoutes from "./routes/alumniRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
+import galleryRoutes from "./routes/galleryRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
@@ -66,6 +67,7 @@ app.use("/api/events", eventRoutes);
 app.use("/api/team", teamRoutes);
 app.use("/api/alumni", alumniRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/gallery", galleryRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

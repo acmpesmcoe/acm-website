@@ -12,19 +12,13 @@ const pageTransition = {
   transition: { duration: 0.35, ease: "easeOut" },
 } as const;
 
-const galleryPhotos = [
-  "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1591115765373-5207764f72e7?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop",
-];
+// Gallery photos will be fetched from the backend
 
 export default function Events() {
   const [tab, setTab] = useState<"upcoming" | "past">("upcoming");
   const [upcomingEvents, setUpcomingEvents] = useState<any[]>([]);
   const [pastEvents, setPastEvents] = useState<any[]>([]);
+  const [galleryPhotos, setGalleryPhotos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -34,6 +28,12 @@ export default function Events() {
         setPastEvents(res.data.past);
       })
       .finally(() => setLoading(false));
+
+    client.get("/gallery")
+      .then((res) => {
+        setGalleryPhotos(res.data);
+      })
+      .catch(() => {});
   }, []);
 
   const list = tab === "upcoming" ? upcomingEvents : pastEvents;
@@ -110,22 +110,26 @@ export default function Events() {
           <h2 className="mt-4 font-display text-3xl font-semibold">Event gallery</h2>
         </ScrollReveal>
         <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3">
-          {galleryPhotos.map((p, i) => (
-            <motion.div
-              key={p}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06, duration: 0.5 }}
-              className="group overflow-hidden rounded-xl"
-            >
-              <img
-                src={p}
-                alt="Event gallery"
-                className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-            </motion.div>
-          ))}
+          {galleryPhotos.length > 0 ? (
+            galleryPhotos.map((p, i) => (
+              <motion.div
+                key={p._id || i}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06, duration: 0.5 }}
+                className="group overflow-hidden rounded-xl"
+              >
+                <img
+                  src={p.imageUrl}
+                  alt={p.caption || "Event gallery"}
+                  className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </motion.div>
+            ))
+          ) : (
+            <p className="col-span-full text-sm text-ink-muted">No photos in the gallery yet.</p>
+          )}
         </div>
       </section>
 

@@ -30,6 +30,10 @@ html.light {
   --c-border-subtle: #E5E7EB;
 }
 
+html {
+  font-size: 14px;
+}
+
 body {
   background-color: var(--c-void);
   color: var(--c-ink-primary);

@@ -23,16 +23,12 @@ const whyJoin = [
   { icon: Sparkles, title: "Get recognized", desc: "Represent PES MCOE at ACM events, contests, and the wider computing community." },
 ];
 
-const photos = [
-  "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1591115765373-5207764f72e7?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop",
-];
+// Gallery photos will be fetched from the backend
 
 export default function Home() {
   const [stats, setStats] = useState<{ value: number; suffix: string; label: string }[]>([]);
   const [upcomingEvents, setUpcomingEvents] = useState<any[]>([]);
+  const [photos, setPhotos] = useState<any[]>([]);
 
   useEffect(() => {
     client.get("/events").then((res) => {
@@ -48,11 +44,15 @@ export default function Home() {
         { value: new Date().getFullYear() - 2022, suffix: "", label: "years running" },
       ]);
     }).catch(() => { });
+
+    client.get("/gallery").then((res) => {
+      setPhotos(res.data.slice(0, 4));
+    }).catch(() => {});
   }, []);
 
   return (
     <motion.main {...pageTransition}>
-      <section className="relative flex min-h-screen items-center overflow-hidden pt-20 bg-gradient-to-br from-[#05050A] via-[#080816] to-[#05050A] force-dark">
+      <section className="relative flex min-h-screen items-center overflow-hidden pt-36 bg-gradient-to-br from-[#05050A] via-[#080816] to-[#05050A] force-dark">
         {/* Dark radial gradient overlay for high text legibility and deep tech aesthetic */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(12,12,32,0.4)_0%,rgba(5,5,10,0.92)_100%)] z-10" />
 
@@ -66,11 +66,11 @@ export default function Home() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="eyebrow inline-block rounded-full border border-bordersubtle bg-surface/60 px-4 py-1.5 text-xs text-accent-secondary"
+            className="eyebrow inline-block rounded-full border border-bordersubtle bg-surface/60 px-5 py-2 text-sm text-accent-secondary"
           >
             // association_for_computing_machinery
           </motion.p>
-          <h1 className="mt-6 max-w-3xl font-display text-5xl font-semibold leading-[1.1] tracking-tight md:text-7xl">
+          <h1 className="mt-6 max-w-3xl font-display text-6xl font-semibold leading-[1.08] tracking-tight md:text-8xl">
             <div className="overflow-hidden py-1">
               <motion.span
                 initial={{ y: "100%" }}
@@ -96,7 +96,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="mt-6 max-w-xl text-lg text-ink-muted"
+            className="mt-6 max-w-xl text-xl leading-relaxed text-ink-muted"
           >
             PES's MCOE ACM Student Chapter is the official student chapter of the
             Association for Computing Machinery at PES Modern College of Engineering.
@@ -110,20 +110,20 @@ export default function Home() {
           >
             <Link
               to="/contact"
-              className="group flex items-center gap-2 rounded-full bg-ink-primary px-6 py-3 text-sm font-medium text-void transition-transform hover:scale-105 shadow-sm"
+              className="group flex items-center gap-2 rounded-full bg-ink-primary px-7 py-3.5 text-base font-medium text-void transition-transform hover:scale-105 shadow-sm"
             >
               Join ACM <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               to="/events"
-              className="rounded-full border border-bordersubtle bg-surface2/30 px-6 py-3 text-sm font-medium text-ink-primary transition-colors hover:border-accent-primary"
+              className="rounded-full border border-bordersubtle bg-surface2/30 px-7 py-3.5 text-base font-medium text-ink-primary transition-colors hover:border-accent-primary"
             >
               See upcoming events
             </Link>
           </motion.div>
         </div>
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[10px] text-ink-faint z-30"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-xs text-ink-faint z-30"
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
@@ -133,12 +133,12 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-6 py-24">
         <ScrollReveal>
-          <p className="eyebrow text-xs text-accent-secondary">// about_acm</p>
-          <h2 className="mt-4 max-w-2xl font-display text-3xl font-semibold md:text-4xl">
+          <p className="eyebrow text-sm text-accent-secondary">// about_acm</p>
+          <h2 className="mt-4 max-w-2xl font-display text-4xl font-semibold md:text-5xl">
             ACM is the world's largest computing society —
             <span className="text-ink-muted"> our chapter is its local runtime.</span>
           </h2>
-          <p className="mt-6 max-w-2xl text-ink-muted">
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-muted">
             Founded in 1947, the Association for Computing Machinery connects
             students, educators, and professionals across the world.
             PES's MCOE ACM Student Chapter brings that global network to Pune: peer
@@ -150,8 +150,8 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-6 py-12">
         <ScrollReveal>
-          <p className="eyebrow text-xs text-accent-secondary">// why_join</p>
-          <h2 className="mt-4 font-display text-3xl font-semibold md:text-4xl">Why students join</h2>
+          <p className="eyebrow text-sm text-accent-secondary">// why_join</p>
+          <h2 className="mt-4 font-display text-4xl font-semibold md:text-5xl">Why students join</h2>
         </ScrollReveal>
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {whyJoin.map((item, i) => (
@@ -159,8 +159,8 @@ export default function Home() {
               <TiltCard className="h-full">
                 <div className="group rounded-2xl border border-bordersubtle bg-surface p-6 transition-colors hover:border-accent-primary/50 h-full">
                   <item.icon className="text-accent-secondary" size={22} />
-                  <h3 className="mt-4 font-display text-lg font-semibold text-ink-primary">{item.title}</h3>
-                  <p className="mt-2 text-sm text-ink-muted leading-relaxed">{item.desc}</p>
+                  <h3 className="mt-4 font-display text-xl font-semibold text-ink-primary">{item.title}</h3>
+                  <p className="mt-2 text-base text-ink-muted leading-relaxed">{item.desc}</p>
                 </div>
               </TiltCard>
             </ScrollReveal>
@@ -172,10 +172,10 @@ export default function Home() {
         <ScrollReveal>
           <div className="flex items-end justify-between">
             <div>
-              <p className="eyebrow text-xs text-accent-secondary">// upcoming</p>
-              <h2 className="mt-4 font-display text-3xl font-semibold md:text-4xl">What's next</h2>
+              <p className="eyebrow text-sm text-accent-secondary">// upcoming</p>
+              <h2 className="mt-4 font-display text-4xl font-semibold md:text-5xl">What's next</h2>
             </div>
-            <Link to="/events" className="hidden font-mono text-sm text-accent-secondary hover:underline md:inline">
+            <Link to="/events" className="hidden font-mono text-base text-accent-secondary hover:underline md:inline">
               ALL EVENTS →
             </Link>
           </div>
@@ -201,41 +201,45 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-6 py-12">
         <ScrollReveal>
-          <p className="eyebrow text-xs text-accent-secondary">// gallery</p>
-          <h2 className="mt-4 font-display text-3xl font-semibold md:text-4xl">Moments from the chapter</h2>
+          <p className="eyebrow text-sm text-accent-secondary">// gallery</p>
+          <h2 className="mt-4 font-display text-4xl font-semibold md:text-5xl">Moments from the chapter</h2>
         </ScrollReveal>
         <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-          {photos.map((p, i) => (
-            <motion.div
-              key={p}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.5 }}
-              className="group overflow-hidden rounded-xl"
-            >
-              <img
-                src={p}
-                alt="ACM chapter event"
-                className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-            </motion.div>
-          ))}
+          {photos.length > 0 ? (
+            photos.map((p, i) => (
+              <motion.div
+                key={p._id || i}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.5 }}
+                className="group overflow-hidden rounded-xl"
+              >
+                <img
+                  src={p.imageUrl}
+                  alt={p.caption || "ACM chapter event"}
+                  className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </motion.div>
+            ))
+          ) : (
+            <p className="col-span-full text-sm text-ink-muted">No photos in the gallery yet.</p>
+          )}
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-24">
         <ScrollReveal>
           <div className="relative overflow-hidden rounded-3xl bg-grad-signal px-8 py-16 text-center">
-            <h2 className="font-display text-3xl font-semibold text-void md:text-4xl">
+            <h2 className="font-display text-4xl font-semibold text-void md:text-5xl">
               Ready to write your first line for the chapter?
             </h2>
-            <p className="mx-auto mt-4 max-w-md text-void/80">
+            <p className="mx-auto mt-4 max-w-md text-lg text-void/80">
               Membership is open to all PES MCOE students, any year, any branch.
             </p>
             <Link
               to="/contact"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-void px-7 py-3 text-sm font-medium text-ink-primary transition-transform hover:scale-105"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-void px-8 py-3.5 text-base font-medium text-ink-primary transition-transform hover:scale-105"
             >
               Join ACM <ArrowRight size={16} />
             </Link>

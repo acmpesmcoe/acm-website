@@ -111,9 +111,11 @@ export default function About() {
               <ScrollReveal key={f._id} delay={i * 0.1}>
                 <div className="flex items-center gap-4 rounded-2xl border border-bordersubtle bg-surface p-5">
                   {!f.image || failedImages[f._id] ? (
-                    <div className="h-16 w-16 rounded-full bg-surface2 flex items-center justify-center font-display text-lg font-bold text-ink-muted select-none shrink-0 border border-bordersubtle/30">
-                      {getInitials(f.name)}
-                    </div>
+                    <img
+                      src="/logo/fallback-logo.jpg"
+                      alt={f.name}
+                      className="h-16 w-16 rounded-full object-cover shrink-0"
+                    />
                   ) : (
                     <img
                       src={f.image}

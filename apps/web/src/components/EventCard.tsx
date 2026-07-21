@@ -18,6 +18,10 @@ export default function EventCard({ event, index = 0, isUpcoming = false, isFeat
   const [modalOpen, setModalOpen] = useState(false);
   const styles = getCategoryStyles(event.tag);
 
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = "/logo/fallback-logo.jpg";
+  };
+
   return (
     <>
       <motion.div
@@ -27,16 +31,17 @@ export default function EventCard({ event, index = 0, isUpcoming = false, isFeat
         transition={{ duration: 0.5, delay: index * 0.08 }}
         whileHover={{ y: -6 }}
         onClick={() => setModalOpen(true)}
-        className={`group relative overflow-hidden rounded-2xl border bg-surface cursor-pointer select-none transition-all duration-300 ${
+        className={`group relative overflow-hidden rounded-2xl glass-panel cursor-pointer select-none transition-all duration-300 ${
           isFeatured 
             ? "border-accent-primary/60 dark:border-accent-primary/45 shadow-[0_0_18px_rgba(66,133,244,0.15)] shadow-black/10" 
-            : "border-bordersubtle shadow-sm"
+            : "shadow-sm"
         }`}
       >
         <div className="relative h-44 overflow-hidden">
           <img
-            src={event.image}
+            src={event.image || "/logo/fallback-logo.jpg"}
             alt={event.title}
+            onError={handleImageError}
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
@@ -65,7 +70,7 @@ export default function EventCard({ event, index = 0, isUpcoming = false, isFeat
 
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={event.title}>
         <div className="overflow-hidden rounded-2xl border border-bordersubtle mb-6">
-          <img src={event.image} alt={event.title} className="h-64 w-full object-cover" />
+          <img src={event.image || "/logo/fallback-logo.jpg"} alt={event.title} onError={handleImageError} className="h-64 w-full object-cover" />
         </div>
         
         <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-ink-muted mb-5">

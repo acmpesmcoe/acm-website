@@ -30,31 +30,29 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 transition-all duration-300 pointer-events-none">
       <nav
-        className={`flex flex-col w-full max-w-5xl rounded-[24px] border backdrop-blur-md transition-all duration-300 pointer-events-auto overflow-hidden ${
-          scrolled || open
-            ? "bg-surface/85 border-bordersubtle shadow-lg shadow-black/5"
-            : "bg-surface/40 border-bordersubtle/30"
+        className={`flex flex-col w-full max-w-6xl rounded-[24px] transition-all duration-300 pointer-events-auto overflow-hidden glass-panel ${
+          scrolled || open ? "shadow-lg shadow-black/10" : ""
         } ${isHomeHero ? "force-dark" : ""}`}
       >
-        <div className="flex w-full items-center justify-between px-6 py-2.5">
+        <div className="flex w-full items-center justify-between px-6 py-4">
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 font-display text-sm font-semibold text-ink-primary hover:opacity-90 transition-opacity"
+            className="flex items-center gap-2 font-display text-base font-semibold text-ink-primary hover:opacity-90 transition-opacity"
           >
             <div className="flex items-center gap-1.5">
               <img
                 src="/logo/pes-logo.png"
                 alt="PES MCOE logo"
-                className="h-10 w-10 object-contain"
+                className="h-16 w-16 object-contain"
               />
               <img
                 src="/logo/acm-logo.png"
                 alt="ACM logo"
-                className="h-10 w-10 object-contain"
+                className="h-16 w-16 object-contain"
               />
             </div>
-            <span className="text-[10px] sm:text-xs md:text-[11px] lg:text-xs font-semibold leading-tight max-w-[140px] sm:max-w-[180px] md:max-w-none md:whitespace-nowrap">
+            <span className="text-xs sm:text-sm md:text-sm lg:text-base font-semibold leading-tight max-w-[140px] sm:max-w-[180px] md:max-w-none md:whitespace-nowrap">
               PES's MCOE ACM Student Chapter
             </span>
           </Link>
@@ -66,7 +64,7 @@ export default function Navbar() {
                 key={link.to}
                 to={link.to}
                 className={({ isActive }) =>
-                  `relative px-2 lg:px-3.5 py-1.5 font-mono text-xs transition-colors z-10 ${
+                  `relative px-3 lg:px-4 py-2 font-mono text-base transition-colors z-10 ${
                     isActive
                       ? "text-ink-primary font-medium"
                       : "text-ink-muted hover:text-ink-primary"
@@ -88,16 +86,18 @@ export default function Navbar() {
               </NavLink>
             ))}
 
+            <a
+              href="http://localhost:5174"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative px-3 lg:px-4 py-2 font-mono text-base text-ink-muted hover:text-ink-primary transition-colors z-10"
+            >
+              Admin
+            </a>
+
             <div className="h-4 w-[1px] bg-bordersubtle mx-1.5" />
 
             <ThemeToggle />
-
-            <Link
-              to="/contact"
-              className="rounded-full bg-grad-signal px-4 py-1.5 text-xs font-medium text-void transition-transform hover:scale-105"
-            >
-              Join ACM
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -129,20 +129,21 @@ export default function Navbar() {
                     key={link.to}
                     to={link.to}
                     onClick={() => setOpen(false)}
-                    className="font-mono text-xs text-ink-muted hover:text-ink-primary"
+                    className="font-mono text-base text-ink-muted hover:text-ink-primary"
                   >
                     {link.label}
                   </NavLink>
                 ))}
 
-
-                <Link
-                  to="/contact"
+                <a
+                  href="http://localhost:5174"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
-                  className="w-fit rounded-full bg-grad-signal px-4 py-1.5 text-xs font-medium text-void"
+                  className="font-mono text-base text-ink-muted hover:text-ink-primary"
                 >
-                  Join ACM
-                </Link>
+                  Admin
+                </a>
               </div>
             </motion.div>
           )}

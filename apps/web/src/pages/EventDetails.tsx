@@ -19,6 +19,10 @@ export default function EventDetails() {
   const [notFound, setNotFound] = useState(false);
   const styles = event ? getCategoryStyles(event.tag) : { bg: "", text: "", border: "" };
 
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = "/logo/fallback-logo.jpg";
+  };
+
   useEffect(() => {
     setLoading(true);
     setNotFound(false);
@@ -61,8 +65,9 @@ export default function EventDetails() {
             <div className="mt-8 overflow-hidden rounded-2xl border border-bordersubtle">
               <div className="relative h-64 md:h-80">
                 <img
-                  src={event.image}
+                  src={event.image || "/logo/fallback-logo.jpg"}
                   alt={event.title}
+                  onError={handleImageError}
                   className="h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />

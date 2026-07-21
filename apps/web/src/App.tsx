@@ -32,6 +32,11 @@ function App() {
 
   return (
     <div className="relative min-h-screen bg-void text-ink-primary font-body overflow-hidden">
+      {/* Liquid Glass Background Blobs */}
+      <div className="liquid-blob bg-accent-primary/20 w-[40vw] h-[40vw] top-[-10vw] left-[-10vw] animate-blob" />
+      <div className="liquid-blob bg-accent-warm/20 w-[35vw] h-[35vw] bottom-[-5vw] right-[-10vw] animate-blob" style={{ animationDelay: '2s' }} />
+      <div className="liquid-blob bg-accent-secondary/20 w-[30vw] h-[30vw] top-[40vh] left-[50vw] animate-blob" style={{ animationDelay: '4s' }} />
+      
       <div className="cursor-glow" />
       <AnimatePresence>{loading && <PageLoader />}</AnimatePresence>
       <Navbar />
