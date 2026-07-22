@@ -89,7 +89,7 @@ export default function Navbar() {
             ))}
 
             <a
-              href="http://localhost:5174"
+              href={import.meta.env.VITE_ADMIN_URL || "http://localhost:5174"}
               target="_blank"
               rel="noopener noreferrer"
               className="relative px-3 lg:px-4 py-2 font-mono text-base text-ink-muted hover:text-ink-primary transition-colors z-10"
@@ -138,7 +138,7 @@ export default function Navbar() {
                 ))}
 
                 <a
-                  href="http://localhost:5174"
+                  href={import.meta.env.VITE_ADMIN_URL || "http://localhost:5174"}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
